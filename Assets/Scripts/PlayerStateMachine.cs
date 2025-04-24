@@ -61,8 +61,9 @@ public class PlayerStateMachine : MonoBehaviour
     public SlideState SlideState { get; private set; }
     public WallClingState WallClingState { get; private set; }
     public ShootState ShootState { get; private set; } // Add ShootState declaration
-    public FallState FallState { get; private set; } // Add FallState declaration
-
+    public FallState FallState { get; private set; } // Add FallState declaration//joe's state
+    public KickState KickState { get; private set; } //joe's state
+    
     // Component References (Example)
     public Rigidbody2D RB { get; private set; }
     public Animator Animator { get; private set; }
@@ -129,7 +130,10 @@ public class PlayerStateMachine : MonoBehaviour
         ShootState = new ShootState(this); // Initialize ShootState
         stateRegistry[nameof(ShootState)] = ShootState; // Register ShootState
         FallState = new FallState(this); // Initialize FallState
-        stateRegistry[nameof(FallState)] = FallState; // Register FallState
+        stateRegistry[nameof(FallState)] = FallState;
+         // Register FallState
+        KickState = new KickState(this); // Initialize KickState
+        stateRegistry[nameof(KickState)] = KickState; // Register KickState
 
         // Initialize jumps
         JumpsRemaining = MaxJumps;
@@ -158,6 +162,8 @@ public class PlayerStateMachine : MonoBehaviour
         wasGroundedLastFrame = isGroundedNow;
 
         currentState?.Tick(Time.deltaTime);
+
+        
     }
 
     public void SwitchState(PlayerBaseState newState)
