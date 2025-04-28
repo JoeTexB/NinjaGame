@@ -17,6 +17,7 @@ public class CoinCollection : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            PlayerStateMachine.Instance.Coins = PlayerStateMachine.Instance.Coins + 1;
             Destroy(gameObject);
         }
     }

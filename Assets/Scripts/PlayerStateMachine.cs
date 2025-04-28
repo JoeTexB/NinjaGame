@@ -19,6 +19,8 @@ public abstract class PlayerBaseState
 // The main state machine component
 public class PlayerStateMachine : MonoBehaviour
 {
+    public static PlayerStateMachine Instance { get; private set; }
+
     private bool wasGroundedLastFrame = true;
 
     // --- Coyote time (grounded grace period) ---
@@ -45,6 +47,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("Crouch Settings")]
     [SerializeField] public float CrouchSpeedMultiplier { get; private set; } = 0.25f; // Half of WalkState's 0.5 multiplier
 
+    public int Coins;
 
     private PlayerBaseState currentState;
 
@@ -62,7 +65,7 @@ public class PlayerStateMachine : MonoBehaviour
     public WallClingState WallClingState { get; private set; }
     public ShootState ShootState { get; private set; } // Add ShootState declaration
     public FallState FallState { get; private set; } // Add FallState declaration//joe's state
-    public KickState KickState { get; private set; } //joe's state
+    //public KickState KickState { get; private set; } //joe's state
     
     // Component References (Example)
     public Rigidbody2D RB { get; private set; }
@@ -83,8 +86,17 @@ public class PlayerStateMachine : MonoBehaviour
     // InputReader abstraction (now a separate class)
     public InputReader InputReader { get; private set; } // Public property for states to access
 
+    // Add these near your other variables
+    private bool isFacingRight = true;
+    public bool IsFacingRight => isFacingRight; // Public getter for other scripts
+
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
         // Get Components
         RB = GetComponent<Rigidbody2D>();
         Animator = GetComponentInChildren<Animator>(); // Or GetComponent<Animator>()
@@ -132,8 +144,8 @@ public class PlayerStateMachine : MonoBehaviour
         FallState = new FallState(this); // Initialize FallState
         stateRegistry[nameof(FallState)] = FallState;
          // Register FallState
-        KickState = new KickState(this); // Initialize KickState
-        stateRegistry[nameof(KickState)] = KickState; // Register KickState
+        //KickState = new KickState(this); // Initialize KickState
+        //stateRegistry[nameof(KickState)] = KickState; // Register KickState
 
         // Initialize jumps
         JumpsRemaining = MaxJumps;
@@ -141,6 +153,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Start()
     {
+        Coins = 0;
         // Set the initial state
         SwitchState(IdleState); // Start in Idle state
         JumpsRemaining = MaxJumps;
@@ -148,6 +161,17 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Update()
     {
+        // Add this before your existing Update code
+        Vector2 movement = InputReader.GetMovementInput();
+        if (movement.x != 0)
+        {
+            // Flip the character based on movement direction
+            if (movement.x > 0 && !isFacingRight)
+                Flip();
+            else if (movement.x < 0 && isFacingRight)
+                Flip();
+        }
+
         // Update coyote time timer
         if (jumpGroundedGraceTimer > 0f)
             jumpGroundedGraceTimer -= Time.deltaTime;
@@ -260,4 +284,11 @@ public class PlayerStateMachine : MonoBehaviour
         return hit == null; // Can stand up if nothing is hit
     }
 
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
 }
