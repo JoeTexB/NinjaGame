@@ -43,9 +43,7 @@ public class InputReader
 
     public bool IsShootPressed()
     {
-        // Use GetButtonDown for single fire per press
-        // Assumes a "Fire1" button is defined (default is Left Ctrl/Mouse 0)
-        return Input.GetButtonDown("Fire1");
-        // If you want continuous fire while held, use GetButton("Fire1")
+        // Use GetMouseButtonDown(0) for left mouse click
+        return Input.GetMouseButtonDown(0);
     }
 }

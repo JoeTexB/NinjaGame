@@ -5,7 +5,26 @@ public class KnifeScript : MonoBehaviour
     private Transform playerTransform;
     public Vector3 offset = new Vector3(0.5f, 0, 0);
     private bool isStickingToPlayer = false;
-    private PlayerStateMachine playerStateMachine; // Reference to player state machine
+    private PlayerStateMachine playerStateMachine;
+
+    // Throwing parameters
+    public float throwSpeed = 15f;
+    public float rotationSpeed = 720f;
+    public float returnSpeed = 20f;
+    public float pickupRadius = 2f; // Increased radius for easier pickup
+    private bool isThrowing = false;
+    private bool isReturning = false;
+    private Vector3 targetPosition;
+    private Vector2 throwDirection;
+    private bool canBePickedUp = true;
+
+    // Debug visualization
+    private void OnDrawGizmosSelected()
+    {
+        // Visualize pickup radius in Scene view
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, pickupRadius);
+    }
 
     void Start()
     {
@@ -13,6 +32,7 @@ public class KnifeScript : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
+            playerTransform = player.transform;
             playerStateMachine = player.GetComponent<PlayerStateMachine>();
         }
     }

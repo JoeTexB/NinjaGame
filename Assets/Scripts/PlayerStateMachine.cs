@@ -172,6 +172,11 @@ public class PlayerStateMachine : MonoBehaviour
                 Flip();
         }
 
+        if (InputReader.IsShootPressed())
+        {
+            SwitchState(ShootState);
+        }
+
         // Update coyote time timer
         if (jumpGroundedGraceTimer > 0f)
             jumpGroundedGraceTimer -= Time.deltaTime;
@@ -211,6 +216,13 @@ public class PlayerStateMachine : MonoBehaviour
     {
         // Delegate to the InputReader instance
         return InputReader.IsRunPressed();
+    }
+    
+    public bool IsShootPressed()
+    {
+        // Delegate to the InputReader instance
+        
+        return InputReader.IsShootPressed();
     }
 
     // For extensibility: get state by name

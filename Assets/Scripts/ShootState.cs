@@ -11,6 +11,11 @@ public class ShootState : PlayerBaseState
     {
         // Logic when entering the shoot state (e.g., play animation, aim)
         Debug.Log("Player entered Shoot State");
+        if (stateMachine.Animator != null)
+        {
+            stateMachine.Animator.Play("DashAnimation");
+            //Debug.Log("ShootState Working");
+        }
         // Ctx.Animator.SetBool("IsShooting", true); // Example animation trigger
     }
 
@@ -27,6 +32,7 @@ public class ShootState : PlayerBaseState
     {
         // Logic when exiting the shoot state (e.g., stop animation)
         Debug.Log("Player exited Shoot State");
+       
         // Ctx.Animator.SetBool("IsShooting", false); // Example animation reset
     }
 
