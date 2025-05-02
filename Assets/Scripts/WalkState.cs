@@ -15,7 +15,7 @@ public class WalkState : PlayerBaseState
         // Play walk animation
         if (stateMachine.Animator != null)
         {
-            stateMachine.Animator.Play("WalkAnimation");
+            stateMachine.Animator.Play("Walk");
         }
         Debug.Log($"[WalkState] Entering Walk State at {enterTime:F2}s");
         // Play walk sound if needed

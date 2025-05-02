@@ -17,7 +17,7 @@ public class WallClingState : PlayerBaseState
         // Optional: Play wall cling animation
         if (stateMachine.Animator != null)
         {
-             stateMachine.Animator.Play("WallClingAnimation"); // Replace with your animation name
+             stateMachine.Animator.Play("Cling"); // Replace with your animation name
         }
         // Reduce initial vertical velocity slightly to make the cling feel better
         if (stateMachine.RB != null)

@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class ShootState : PlayerBaseState
+public class LuckyBlockState : PlayerBaseState
 {
     // Store reference to the state machine
     // No factory needed based on PlayerStateMachine.cs structure
 
-    public ShootState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    public LuckyBlockState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
         // Logic when entering the shoot state (e.g., play animation, aim)
-        Debug.Log("Player entered Shoot State");
+        Debug.Log("Player entered LuckyBlock State");
         if (stateMachine.Animator != null)
         {
             stateMachine.Animator.Play("Cling");
@@ -31,7 +31,7 @@ public class ShootState : PlayerBaseState
     public override void Exit()
     {
         // Logic when exiting the shoot state (e.g., stop animation)
-        Debug.Log("Player exited Shoot State");
+        Debug.Log("Player exited LuckyBlock State");
        
         // Ctx.Animator.SetBool("IsShooting", false); // Example animation reset
     }
@@ -54,10 +54,11 @@ public class ShootState : PlayerBaseState
                 if (stateMachine.InputReader.IsCrouchHeld())
                 {
                     stateMachine.SwitchState(stateMachine.CrouchState);
+                    
                 }
                 else
                 {
-                    Vector2 moveInput = stateMachine.InputReader.GetßMovementInput();
+                    Vector2 moveInput = stateMachine.InputReader.GetMovementInput();
                     if (moveInput == Vector2.zero)
                         stateMachine.SwitchState(stateMachine.IdleState);
                     else if (stateMachine.InputReader.IsRunPressed())
