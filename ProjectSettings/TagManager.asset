@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - LuckyBlock
+  - Knife
   layers:
   - Default
   - TransparentFX

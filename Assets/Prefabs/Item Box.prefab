@@ -121,7 +121,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -148,6 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3be43a0f71c48129d997b8bf9076e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LootList:
+  - {fileID: 103682, guid: 3e707ed2970f72f4fa722591811337ed, type: 3}
+  - {fileID: 2032170427902897246, guid: da752129c96d24b9a99a3fea2a3dc929, type: 3}
+  - {fileID: 193220, guid: 4452304ede9b69b4db8ef1d677b45639, type: 3}
+  - {fileID: 193220, guid: 7c6b6a031e0034471b240d6f3665701b, type: 3}
+  - {fileID: 193220, guid: 5d62731321ab34845b686cb96165cbe0, type: 3}
 --- !u!50 &-7353520107875575230
 Rigidbody2D:
   serializedVersion: 5
@@ -163,7 +169,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

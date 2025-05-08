@@ -2,28 +2,50 @@ using UnityEngine;
 
 public class BlockScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private Rigidbody rb;
+    private Rigidbody2D rb;
+    private float ContactCoolDown;
+
+    public GameObject[] LootList; // Array of possible loot prefabs
+
+    private int TouchesBlock;
+
     void Start()
     {
-       rb = GetComponent<Rigidbody>();
-       rb.useGravity = false;
-       //rb.gravityScale = 0f;
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        ContactCoolDown = 2f;
+        TouchesBlock = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        ContactCoolDown -= Time.deltaTime;
     }
-    private void OnCollisionEnter(Collision other)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        TouchesBlock++;
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player hit the block");
-            //other.gameObject.GetComponent<PlayerStateMachine>().SwitchState(other.gameObject.GetComponent<PlayerStateMachine>().LuckyBlockState);
-            rb.useGravity = true;
-            
+            rb.gravityScale = 1;
+
+            if (ContactCoolDown < 0)
+            {
+                Debug.Log("Player hit the block");
+                // Optional: Call state switch here
+            }
+        }
+
+        if (TouchesBlock >= 2)
+        {
+            if (LootList.Length > 0)
+            {
+                int randomIndex = Random.Range(0, LootList.Length);
+                Instantiate(LootList[randomIndex], transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+
+            Destroy(gameObject);
         }
     }
 }

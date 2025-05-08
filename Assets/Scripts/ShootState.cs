@@ -57,7 +57,7 @@ public class ShootState : PlayerBaseState
                 }
                 else
                 {
-                    Vector2 moveInput = stateMachine.InputReader.GetßMovementInput();
+                    Vector2 moveInput = stateMachine.InputReader.GetMovementInput();
                     if (moveInput == Vector2.zero)
                         stateMachine.SwitchState(stateMachine.IdleState);
                     else if (stateMachine.InputReader.IsRunPressed())
