@@ -6,6 +6,9 @@ TagManager:
   tags:
   - LuckyBlock
   - Knife
+  - coinGold
+  - coinRed
+  - coinBlue
   layers:
   - Default
   - TransparentFX

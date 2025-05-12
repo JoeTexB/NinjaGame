@@ -2,31 +2,24 @@ using UnityEngine;
 
 public class InputReader
 {
-    // Consider using Unity's new Input System for more robust handling
-    // For now, using the legacy Input Manager
+    public bool CoinBlueInput = false;
 
     public Vector2 GetMovementInput()
     {
-        // Use GetAxisRaw for immediate response without smoothing
         float horizontal = Input.GetAxisRaw("Horizontal");
-        // float vertical = Input.GetAxisRaw("Vertical"); // Ignore vertical axis for standard movement
-
-        // Only use horizontal input for walking/running
-        Vector2 input = new Vector2(horizontal, 0f);
-
-        // Normalization might not be strictly necessary anymore with only one axis,
-        // but doesn't hurt to keep if other inputs could be added later.
-        // if (input.sqrMagnitude > 1) // No need to normalize a 1D vector derived this way
-        // {
-        //     input.Normalize();
-        // }
-        return input;
+        return new Vector2(horizontal, 0f);
     }
 
     public bool IsRunPressed()
     {
-        // Use GetKey for continuous check while held
-        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        // Only return Shift key state if CoinBlue is true
+        Debug.Log("CoinBlueInput: " + CoinBlueInput);
+        if (CoinBlueInput)
+        {
+            return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        }
+
+        return false;
     }
 
     public bool IsJumpPressed()
@@ -36,14 +29,17 @@ public class InputReader
 
     public bool IsCrouchHeld()
     {
-        // Use GetKey for continuous check while held
-        // Consider making the key configurable
         return Input.GetKey(KeyCode.C);
     }
 
     public bool IsShootPressed()
     {
-        // Use GetMouseButtonDown(0) for left mouse click
         return Input.GetMouseButtonDown(0);
+    }
+
+    // Method to explicitly set CoinBlueInput
+    public void SetCoinBlue(bool value)
+    {
+        CoinBlueInput = value;
     }
 }

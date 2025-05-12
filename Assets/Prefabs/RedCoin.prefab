@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4106664295121916814}
   m_Layer: 9
   m_Name: RedCoin
-  m_TagString: Untagged
+  m_TagString: coinRed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbcd32cdf63e4a53a1e73d78276dcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoinType: 0
+  spriteRenderer: {fileID: 0}
+  CoinBlue: 0
+  CoinRed: 0
 --- !u!58 &4106664295121916814
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -4,6 +4,11 @@ public class RunState : PlayerBaseState
 {
     private float enterTime;
 
+    public CoinCollection Cc;
+
+    // Add a property to track the "coin blue" state
+    private bool isCoinBlue = false;
+
     public RunState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -60,8 +65,9 @@ public class RunState : PlayerBaseState
             return; // Exit early after state switch
         }
 
-
-        if (stateMachine.InputReader.IsRunPressed()) {
+        // Allow Run input only if "coin blue" is true
+        if (isCoinBlue && stateMachine.InputReader.IsRunPressed())
+        {
             stateMachine.SwitchState(stateMachine.RunState);
         }
         else
@@ -99,5 +105,11 @@ public class RunState : PlayerBaseState
     {
         // Optionally stop run animation or sound
         Debug.Log($"[RunState] Exiting Run State after {Time.time - enterTime:F2}s");
+    }
+
+    // Method to set the "coin blue" state
+    public void SetCoinBlue(bool value)
+    {
+        isCoinBlue = value;
     }
 }
