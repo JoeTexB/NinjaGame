@@ -37,6 +37,11 @@ public class InputReader
         return Input.GetMouseButtonDown(0);
     }
 
+    public bool IsDancedPressed()
+    {
+        return Input.GetKey(KeyCode.J);
+    }
+
     // Method to explicitly set CoinBlueInput
     public void SetCoinBlue(bool value)
     {
