@@ -3,6 +3,7 @@ using UnityEngine;
 public class InputReader
 {
     public bool CoinBlueInput = false;
+    public bool CanDance = false;
 
     public Vector2 GetMovementInput()
     {
@@ -34,17 +35,30 @@ public class InputReader
 
     public bool IsShootPressed()
     {
-        return Input.GetMouseButtonDown(0);
+        bool shootInput = Input.GetMouseButtonDown(0);
+        if (shootInput)
+        {
+            Debug.Log("ShootPressed: Mouse button 0 was pressed!");
+        }
+        return shootInput;
     }
 
     public bool IsDancedPressed()
     {
-        return Input.GetKey(KeyCode.J);
+        // Only allow dance if CanDance is true
+        Debug.Log("CanDance: " + CanDance);
+        return CanDance && Input.GetKey(KeyCode.J);
     }
 
     // Method to explicitly set CoinBlueInput
     public void SetCoinBlue(bool value)
     {
         CoinBlueInput = value;
+    }
+
+    public void SetCanDance(bool value)
+    {
+        Debug.Log("Setting CanDance to: " + value);
+        CanDance = value;
     }
 }

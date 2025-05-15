@@ -55,7 +55,7 @@ public class JumpState : PlayerBaseState
                 stateMachine.RB.linearVelocity = new Vector2(stateMachine.RB.linearVelocity.x, 0f); // Reset vertical velocity
                 stateMachine.RB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 hasJumped = true;
-                Debug.Log("[JumpState] Ground Jump performed. Jumps left: " + stateMachine.JumpsRemaining);
+                Debug.Log("[JumpState] Ground Jump performed. Jumps left: " + stateMachine.JumpsRemaining); 
             }
         }
         else if (stateMachine.JumpsRemaining > 0)
@@ -67,7 +67,7 @@ public class JumpState : PlayerBaseState
                 stateMachine.RB.linearVelocity = new Vector2(stateMachine.RB.linearVelocity.x, 0f); // Reset vertical velocity
                 stateMachine.RB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 hasJumped = true;
-                Debug.Log("[JumpState] Double Jump performed. Jumps left: " + stateMachine.JumpsRemaining);
+                Debug.Log("[JumpState] Double Jump performed. Jumps left: " + stateMachine.JumpsRemaining); 
             }
         }
         else
@@ -82,6 +82,12 @@ public class JumpState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        if (stateMachine.InputReader.IsDancedPressed())
+        {
+            stateMachine.SwitchState(stateMachine.DanceState);
+            return;
+        }
+
         // Debug: Print grounded state and vertical velocity every frame in JumpState
         Debug.Log($"[JumpState] Tick: IsGrounded={stateMachine.IsGrounded()} VelocityY={stateMachine.RB.linearVelocity.y}");
 

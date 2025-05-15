@@ -44,7 +44,9 @@ public class CoinCollection : MonoBehaviour
             }
             else if (CoinType == 2)
             {
-               CoinRed = true;
+                CoinRed = true;
+                Debug.Log("Red coin collected. Setting CanDance in InputReader.");
+                PlayerStateMachine.Instance.InputReader.SetCanDance(true);
             }
             else if (CoinType == 3)
             {

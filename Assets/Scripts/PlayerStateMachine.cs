@@ -90,6 +90,11 @@ public class PlayerStateMachine : MonoBehaviour
     private bool isFacingRight = true;
     public bool IsFacingRight => isFacingRight; // Public getter for other scripts
 
+    public DanceState DanceState { get; private set; }
+
+    [SerializeField] private Vector3 defaultScale = Vector3.one;
+    public Vector3 DefaultScale => defaultScale;
+
     private void Awake()
     {
         if (Instance == null)
@@ -149,6 +154,9 @@ public class PlayerStateMachine : MonoBehaviour
 
         // Initialize jumps
         JumpsRemaining = MaxJumps;
+
+        DanceState = new DanceState(this);
+        stateRegistry[nameof(DanceState)] = DanceState;
     }
 
     private void Start()
@@ -301,6 +309,11 @@ public class PlayerStateMachine : MonoBehaviour
         isFacingRight = !isFacingRight;
         Vector3 scale = transform.localScale;
         scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    public void SetPlayerScale(Vector3 scale)
+    {
         transform.localScale = scale;
     }
 }

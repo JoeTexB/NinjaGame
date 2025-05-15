@@ -16,6 +16,11 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        if (stateMachine.InputReader.IsDancedPressed())
+        {
+            stateMachine.SwitchState(stateMachine.DanceState);
+            return;
+        }
         // --- NEW: Check for loss of ground or wall contact ---
         if (!stateMachine.IsGrounded())
         {

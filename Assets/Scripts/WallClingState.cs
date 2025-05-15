@@ -13,7 +13,7 @@ public class WallClingState : PlayerBaseState
         enterTime = Time.time;
         jumpHeldOnEnter = stateMachine.InputReader.IsJumpPressed();
         Debug.Log($"[WallClingState] Entering Wall Cling State at {enterTime:F2}s");
-
+        
         // Optional: Play wall cling animation
         if (stateMachine.Animator != null)
         {
@@ -34,14 +34,14 @@ public class WallClingState : PlayerBaseState
             stateMachine.SwitchState(stateMachine.ShootState);
             return; // Exit early
         }
-
+        
         // Apply slow downward slide
         if (stateMachine.RB != null)
         {
             // Apply a constant downward velocity, overriding gravity effect while clinging
             stateMachine.RB.linearVelocity = new Vector2(stateMachine.RB.linearVelocity.x, -slideSpeed);
         }
-
+        
         // Check for jump input to perform a wall jump
         // Only allow wall jump if jump wasn't held on enter (prevents infinite wall jumps)
         if (stateMachine.InputReader.IsJumpPressed() && !jumpHeldOnEnter)
@@ -55,7 +55,7 @@ public class WallClingState : PlayerBaseState
         {
             jumpHeldOnEnter = false;
         }
-
+        
         // Check if grounded
         if (stateMachine.IsGrounded())
         {
@@ -70,7 +70,7 @@ public class WallClingState : PlayerBaseState
                 stateMachine.SwitchState(stateMachine.WalkState);
             return;
         }
-
+        
         // Check if no longer touching the wall
         if (!stateMachine.IsTouchingWall())
         {
