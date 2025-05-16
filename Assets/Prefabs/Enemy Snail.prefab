@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 425528}
   - component: {fileID: 21226484}
   - component: {fileID: 4447567895472329101}
+  - component: {fileID: -4471474742547523313}
   m_Layer: 6
   m_Name: Enemy Snail
-  m_TagString: Untagged
+  m_TagString: Snail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,3 +135,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7714286, y: 0.44285715}
   m_EdgeRadius: 0
+--- !u!114 &-4471474742547523313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7e81cf5791c4fb89a05111ff26158a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  detectionRange: 5
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerTransform: {fileID: 0}

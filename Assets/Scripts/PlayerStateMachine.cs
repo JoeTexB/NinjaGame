@@ -48,6 +48,7 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] public float CrouchSpeedMultiplier { get; private set; } = 0.25f; // Half of WalkState's 0.5 multiplier
 
     public int Coins;
+    public int Health;
 
     private PlayerBaseState currentState;
 
@@ -162,6 +163,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void Start()
     {
         Coins = 0;
+        Health = 10;
         // Set the initial state
         SwitchState(IdleState); // Start in Idle state
         JumpsRemaining = MaxJumps;
@@ -199,8 +201,6 @@ public class PlayerStateMachine : MonoBehaviour
         wasGroundedLastFrame = isGroundedNow;
 
         currentState?.Tick(Time.deltaTime);
-
-        
     }
 
     public void SwitchState(PlayerBaseState newState)

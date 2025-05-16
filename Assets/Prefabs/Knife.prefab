@@ -106,6 +106,10 @@ MonoBehaviour:
   rotationSpeed: 720
   returnSpeed: 20
   pickupRadius: 1
+  startAttachedToPlayer: 0
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!60 &-880940187600576564
 PolygonCollider2D:
   m_ObjectHideFlags: 0

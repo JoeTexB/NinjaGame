@@ -4,17 +4,14 @@ using TMPro;
 public class HUDScript : MonoBehaviour
 {
     public TMP_Text CoinsText;
-    public GameObject HealthText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public TMP_Text HealthText;
 
-    // Update is called once per frame
     void Update()
     {
-        CoinsText.text = "Coins: " + PlayerStateMachine.Instance.Coins;
-        
+        if (PlayerStateMachine.Instance != null && CoinsText != null)
+        {
+            CoinsText.text = "Coins: " + PlayerStateMachine.Instance.Coins;
+            HealthText.text = "Health: " + PlayerStateMachine.Instance.Health;
+        }
     }
 }
